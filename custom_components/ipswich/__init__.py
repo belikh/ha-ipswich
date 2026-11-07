@@ -11,7 +11,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
-from .client import LayerDefinition, IpswichClient
+from .client import IpswichClient, LayerDefinition
 from .const import (
     CONF_ADDRESS,
     CONF_MODE,

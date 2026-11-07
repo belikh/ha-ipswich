@@ -33,3 +33,12 @@ Licence: MIT. Data © Ipswich City Council (Creative Commons). Unofficial; not e
 
 
 ## v0.1.1 — Curated: superseded/LIDAR/contours/DTM/aerial datasets removed — 68 -> 22 sensors.
+
+
+## Live status reality check
+
+Ipswich open data contains essentially no live status feeds — only
+locations (e.g. Traffic Signals). Under the status-only rule there is
+nothing meaningful to expose beyond "no live status available in open
+data". The v0.3.0 bundle therefore adds **no new sensors** for
+Ipswich; the catalogue stays at Traffic Signals only.
