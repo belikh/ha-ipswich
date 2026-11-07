@@ -7,11 +7,12 @@ from datetime import UTC, date, datetime
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from . import IpswichCoordinator
-from .const import MODE_WASTE
+from . import  IpswichCoordinator
+from .const import DOMAIN,  MODE_WASTE
 from .waste import next_collection_date
 
 EPOCH = date(2026, 1, 5)
@@ -32,6 +33,13 @@ class IpswichLayerSensor(
     ) -> None:
         """Initialise with the layer title and source URL."""
         super().__init__(coordinator)
+        self._attr_device_info = DeviceInfo(
+            identifiers={(DOMAIN, DOMAIN)},
+            name="Ipswich",
+            manufacturer="belikh",
+            model="Ipswich Integration",
+            configuration_url="https://github.com/belikh/ha-ipswich",
+        )
         self._layer_title = layer_title
         self._source_url = source_url
         slug = layer_title.lower().replace(" ", "_")
@@ -67,6 +75,13 @@ class IpswichWasteNextCollectionSensor(
     def __init__(self, coordinator: IpswichCoordinator) -> None:
         """Initialise the waste sensor."""
         super().__init__(coordinator)
+        self._attr_device_info = DeviceInfo(
+            identifiers={(DOMAIN, DOMAIN)},
+            name="Ipswich",
+            manufacturer="belikh",
+            model="Ipswich Integration",
+            configuration_url="https://github.com/belikh/ha-ipswich",
+        )
 
     @property
     def native_value(self) -> str | None:
