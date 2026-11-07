@@ -6,19 +6,16 @@ CATALOGUE_FIXTURE = {
     "result": {
         "results": [
             {
-                "name": "ipswich-cadastral",
-                "title": "Ipswich Cadastral",
-                "notes": "Cadastral boundaries",
+                "name": "ipswich-traffic-signals",
+                "title": "Ipswich Traffic Signals",
+                "notes": "Signal locations and states",
                 "resources": [{"url": "https://example.com/a.geojson"}],
             },
             {
-                "name": "ipswich-parks-and-reserves",
-                "title": "Ipswich Parks and Reserves",
-                "notes": "Parks",
-                "resources": [
-                    {"url": "https://example.com/b.geojson"},
-                    {"url": "https://example.com/c.geojson"},
-                ],
+                "name": "ipswich-cadastral",
+                "title": "Ipswich Cadastral",
+                "notes": "Static; must be filtered out",
+                "resources": [{"url": "https://example.com/b.geojson"}],
             },
             {"name": "", "title": ""},
         ]
@@ -26,9 +23,9 @@ CATALOGUE_FIXTURE = {
 }
 
 
-def test_parse_catalogue_skips_empty_and_sorts() -> None:
+def test_parse_catalogue_keeps_only_dynamic() -> None:
     layers = parse_catalogue(CATALOGUE_FIXTURE)
-    assert len(layers) == 2
-    assert layers[0].title == "Ipswich Cadastral"
-    assert layers[0].url == "https://data.gov.au/data/dataset/ipswich-cadastral"
-    assert layers[1].resource_count == 2
+    assert len(layers) == 1
+    assert layers[0].title == "Ipswich Traffic Signals"
+    assert layers[0].url == "https://data.gov.au/data/dataset/ipswich-traffic-signals"
+    assert layers[0].resource_count == 1
