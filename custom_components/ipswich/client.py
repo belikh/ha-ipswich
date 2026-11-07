@@ -32,6 +32,21 @@ class CatalogueResult:
     layers: list[LayerDefinition] = field(default_factory=list)
 
 
+JUNK_TITLE_SUBSTRINGS = (
+    "superseded",
+    "lidar",
+    "contours",
+    "dtm",
+    "aerial photography",
+)
+
+
+def is_junk_title(title: str) -> bool:
+    """Return True if a dataset is superseded/static junk."""
+    lowered = title.lower()
+    return any(token in lowered for token in JUNK_TITLE_SUBSTRINGS)
+
+
 def parse_catalogue(payload: dict[str, Any]) -> list[LayerDefinition]:
     """Parse a CKAN package_search payload into layers.
 
@@ -43,6 +58,8 @@ def parse_catalogue(payload: dict[str, Any]) -> list[LayerDefinition]:
         name = str(item.get("name") or "").strip()
         title = str(item.get("title") or name).strip()
         if not name:
+            continue
+        if is_junk_title(title):
             continue
         description = str(item.get("notes") or "").strip()
         resources = item.get("resources") or []

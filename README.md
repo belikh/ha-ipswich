@@ -30,3 +30,6 @@ uv run mypy
 ```
 
 Licence: MIT. Data © Ipswich City Council (Creative Commons). Unofficial; not endorsed by the council.
+
+
+## v0.1.1 — Curated: superseded/LIDAR/contours/DTM/aerial datasets removed — 68 -> 22 sensors.
